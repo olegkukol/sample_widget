@@ -1,20 +1,18 @@
-### `main-app - основное приложения для встраивания виджета`
-
-```bash
-cd main-app
-npm install
-npm start
-```
-
-### `widget-app - встраиваемое приложение в виде виджета`
+### `1) widget-app - встраиваемое приложение в виде виджета. Сборка билда:`
 
 ```bash
 cd widget-app
-npm install
+npm build
+```
+
+### `2) main-app - основное приложения для встраивания виджета. Запуск приложения:`
+
+```bash
+cd main-app
 npm start
 ```
 
-## `Использование`
+## `3) Использование:`
 ```
 const widgetContainer = document.createElement('div');
 widgetContainer.id = 'widget-app';
