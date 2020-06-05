@@ -1,21 +1,20 @@
-### `1) widget-app - встраиваемое приложение в виде виджета. Сборка билда:`
+### `1) main-app - основное приложения для встраивания виджета. Билд основного приложения:`
 
 ```bash
 cd widget-app
 npm build
 ```
 
-### `2) main-app - основное приложения для встраивания виджета. Запуск приложения:`
+### `2) widget-app - встраиваемое приложение в виде виджета. Сборка его билда и перенос в билд основного:`
 
 ```bash
-cd main-app
-npm start
+cd ..
+cd widget-app
+npm build-move
 ```
 
 ## `3) Использование:`
+`Перейти в main-app/build/static и запустить index.html. В консоли выполнить:`
 ```
-const widgetContainer = document.createElement('div');
-widgetContainer.id = 'widget-app';
-document.getElementsByClassName('App')[0].appendChild(widgetContainer);
-window.ReactTestWidget.mount('widget-app');
+window.ReactTestWidget.mount('widget');
 ```

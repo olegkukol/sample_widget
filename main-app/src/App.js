@@ -4,6 +4,15 @@ import './App.css';
 
 class App extends Component {
 
+  componentDidMount () {
+    const script = document.createElement("script");
+
+    script.src = "./static/js/widget_bundle.js";
+    script.async = true;
+
+    document.body.appendChild(script);
+  }
+
   render() {
     return (
       <div className="App">
@@ -13,6 +22,7 @@ class App extends Component {
             This is the main App. 
           </p>
         </header>
+        <div id="widget" />
       </div>
     );
   }

@@ -1,30 +1,38 @@
-var fs = require('fs');
+const fs = require('fs');
+const path = require('path');
 
-module.exports.init = function move(oldPath, newPath, callback) {
+const move = (oldPath, newPath) => {
 
-    fs.rename(oldPath, newPath, function (err) {
+    fs.rename(oldPath, newPath, (err) => {
         if (err) {
             if (err.code === 'EXDEV') {
                 copy();
             } else {
-                callback(err);
+                console.log(err);
             }
             return;
         }
-        callback();
     });
 
-    function copy() {
+    copy = () => {
         var readStream = fs.createReadStream(oldPath);
         var writeStream = fs.createWriteStream(newPath);
 
-        readStream.on('error', callback);
-        writeStream.on('error', callback);
+        readStream.on('error', (e) => {console.log(e)});
+        writeStream.on('error', (e) => {console.log(e)});
 
-        readStream.on('close', function () {
-            fs.unlink(oldPath, callback);
+        readStream.on('close', () => {
+            fs.unlink(oldPath, console.log('success'));
         });
 
         readStream.pipe(writeStream);
     }
 }
+
+let pathFrom = process.env.movepathfrom;
+let pathTo = process.env.movepathto;
+let fname = process.env.movename;
+console.log(pathFrom, pathTo, fname);
+
+if(pathFrom && pathTo)
+    move(path.join(__dirname, '/../' + pathFrom), path.join(__dirname, '/../' + pathTo) + '/' + fname);

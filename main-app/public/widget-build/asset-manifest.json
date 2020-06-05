@@ -1,9 +1,0 @@
-{
-  "main.css": "./static/css/react-widget.css",
-  "main.js": "./static/js/react-widget.js",
-  "main.js.map": "./static/js/react-widget.js.map",
-  "./static/css/react-widget.css.map": "./static/css/react-widget.css.map",
-  "index.html": "index.html",
-  "precache-manifest.b040190472399ae4fc83908fa72d7f62.js": "precache-manifest.b040190472399ae4fc83908fa72d7f62.js",
-  "service-worker.js": "service-worker.js"
-}

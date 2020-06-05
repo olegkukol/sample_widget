@@ -1,77 +1,43 @@
 const path = require('path');
 
 module.exports = {
-    entry: [
-        './src/index.js',
-    ],
+    entry: './src/index.js',
     output: {
-        filename: './js/bundle.js'
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'bundle.js',
+        chunkFilename: '[id].js',
+        publicPath: ''
     },
-    devtool: "source-map",
+    resolve: {
+        extensions: ['.js', '.jsx']
+    },
     module: {
-        rules: [
-            {
-                test: /\.(js|mjs|jsx|ts|tsx)$/,
-                include: path.resolve(__dirname, 'src'),loader: require.resolve('babel-loader'),
-                options: {
-                    customize: require.resolve(
-                        'babel-preset-react-app/webpack-overrides'
-                    ),
-
-                    plugins: [
-                        [
-                            require.resolve('babel-plugin-named-asset-import'),
-                            {
-                                loaderMap: {
-                                    svg: {
-                                        ReactComponent: '@svgr/webpack?-prettier,-svgo![path]',
-                                    },
-                                },
-                            },
-                        ],
-                    ],
-                    cacheDirectory: true,
-                    // Save disk space when time isn't as important
-                    cacheCompression: true,
-                    compact: true,
-                },
+        rules: [{
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
+                loader: "babel-loader"
             },
-            // Process any JS outside of the app with Babel.
-            // Unlike the application JS, we only compile the standard ES features.
             {
-                test: /\.(js|mjs)$/,
-                exclude: /@babel(?:\/|\\{1,2})runtime/,
-                loader: require.resolve('babel-loader'),
-                options: {
-                    babelrc: false,
-                    configFile: false,
-                    compact: false,
-                    presets: [
-                        [
-                            require.resolve('babel-preset-react-app/dependencies'),
-                            { helpers: true },
-                        ],
-                    ],
-                    cacheDirectory: true,
-                    // Save disk space when time isn't as important
-                    cacheCompression: true,
-
-                    // If an error happens in a package, it's possible to be
-                    // because it was compiled. Thus, we don't want the browser
-                    // debugger to show the original code. Instead, the code
-                    // being evaluated would be much more helpful.
-                    sourceMaps: false,
-                },
+                test: /\.css$/,
+                exclude: /node_modules/,
+                use: [
+                    { loader: 'style-loader' },
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: {
+                                localIdentName: "[name]__[local]___[hash:base64:5]",
+                            },
+                            sourceMap: true
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.(png|jpe?g|gif)$/,
+                loader: 'url-loader?limit=10000&name=img/[name].[ext]'
             }
         ]
     },
-    plugins: [
-    ],
-    externals: {
-      "styled-components": {
-          commonjs: "styled-components",
-          commonjs2: "styled-components",
-          amd: "styled-components",
-        },
-    }
+    plugins: []
 };
