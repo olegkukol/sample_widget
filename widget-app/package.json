@@ -57,7 +57,7 @@
     "react-app-rewire-mobx": "^1.0.9",
     "react-app-rewired": "^2.1.3",
     "react-scripts": "^3.4.0",
-    "stylelint": "^9.10.1",
+    "stylelint": "^15.10.1",
     "stylelint-config-recommended": "^2.1.0",
     "stylelint-config-styled-components": "^0.1.1",
     "stylelint-processor-styled-components": "^1.5.2",
